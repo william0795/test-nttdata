@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="header-table">
+        <div class="cont-search">
+            <input (keyup.enter)='buscarPorTexto($event)' placeholder="Search..." type="text">
+        </div>
+        <div (click)="crearProducto()">
+            <button class="btn-agg">Agregar</button>
+        </div>
+    </div>
+    <div class="cont-table">
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Logo</th>
+                        <th>Nombre del producto</th>
+                        <th>Descripcion</th>
+                        <th>Fecha de liberación</th>
+                        <th>Fecha de reestructuración</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of listProductos; let i = index">
+                        <td>{{item.logo}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.description}}</td>
+                        <td>{{item.date_release}}</td>
+                        <td>{{item.date_revision}}</td>
+                        <td>
+                            <div class="dropdown">
+                                <span class="dropdown-toggle" (click)="toggleDropdown(i)">
+                                  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                </span>
+                                <div id="drop_{{i}}" class="dropdown-menu">
+                                  <span (click)="editarProducto(item)" class="dropdown-item">Editar</span>
+                                  <span (click)="eliminarProducto(item)" class="dropdown-item">Eliminar</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="cont-select">
+            <div>
+                <span>{{cantidadMostrar}} resultados</span>
+            </div>
+            <div>
+                <select (change)="showTable($event)" class="select-form" name="selectcant" id="selectcant">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<!-- eliminar-producto-modal.component.html -->
+
+<div class="modal" id="eliminarProductoModal">
+    <div class="modal-content">
+      <div class="head-modal ">
+        <span>¿Estas seguro de eliminar el producto {{nameProductoElim}}?</span>
+      </div>
+      
+      <div class="modal-buttons">
+        <button (click)="closeModal()">Cancelar</button>
+        <button class="btn-agg" (click)="confirmDelete()">Confirmar </button>
+      </div>
+    </div>
+  </div>
